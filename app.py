@@ -9,9 +9,9 @@ st.write("Python version:", sys.version)
 # -----------------------------
 # CARGAR MODELOS
 # -----------------------------
-rf = joblib.load('modelo_Random_Forest.pkl')
-dt = joblib.load('modelo_Decision_Tree.pkl')
-lr = joblib.load('modelo_Logistic_Regression.pkl')
+rf = joblib.load('modelo_Random_Forest_.pkl')
+dt = joblib.load('modelo_Decision_Tree_.pkl')
+lr = joblib.load('modelo_Logistic_Regression_.pkl')
 
 st.set_page_config(page_title="Predicción de Empleabilidad", page_icon="🎓", layout="wide")
 
