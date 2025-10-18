@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 # -----------------------------
 # CARGAR MODELOS
 # -----------------------------
-rf = joblib.load('modelo_Random Forest.pkl')
-dt = joblib.load('modelo_Decision Tree.pkl')
-lr = joblib.load('modelo_Logistic Regression.pkl')
+rf = joblib.load('modelo_Random_Forest.pkl')
+dt = joblib.load('modelo_Decision_Tree.pkl')
+lr = joblib.load('modelo_Logistic_Regression.pkl')
 
 st.set_page_config(page_title="Predicción de Empleabilidad", page_icon="🎓", layout="wide")
 
@@ -81,3 +81,4 @@ best_model = models[values.index(max(values))]
 st.success(f"✅ El modelo con mayor probabilidad predice que estás **{max(values)*100:.1f}% empleable** según **{best_model}**.")
 st.markdown("---")
 st.caption("Desarrollado por Samantha Quintanchala — Proyecto Final de Machine Learning")
+
