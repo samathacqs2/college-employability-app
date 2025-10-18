@@ -21,7 +21,7 @@ st.caption("Desarrollado por **Samantha Quintanchala** — Proyecto Final de Mac
 st.info(f"🧠 Versión de Python: `{sys.version.split()[0]}`")
 
 # ==========================
-# ⚡ CARGA CON CACHE
+# ⚡ CARGA DE MODELOS CON CACHE
 # ==========================
 @st.cache_resource
 def load_models():
@@ -53,10 +53,10 @@ st.sidebar.header("🧮 Factores de entrada")
 IQ = st.sidebar.slider("IQ", 80, 160, 110)
 Prev_Sem_Result = st.sidebar.slider("Promedio del semestre previo", 0.0, 10.0, 7.5)
 CGPA = st.sidebar.slider("CGPA final", 0.0, 10.0, 7.0)
-Academic_Performance = st.sidebar.slider("Desempeño académico (1-10)", 1, 10, 8)
+Academic_Performance = st.sidebar.slider("Desempeño académico (1–10)", 1, 10, 8)
 Internship_Experience = st.sidebar.selectbox("¿Tuvo experiencia en prácticas?", ["No", "Sí"])
-Extra_Curricular_Score = st.sidebar.slider("Actividades extracurriculares (1-10)", 1, 10, 5)
-Communication_Skills = st.sidebar.slider("Habilidades de comunicación (1-10)", 1, 10, 7)
+Extra_Curricular_Score = st.sidebar.slider("Actividades extracurriculares (1–10)", 1, 10, 5)
+Communication_Skills = st.sidebar.slider("Habilidades de comunicación (1–10)", 1, 10, 7)
 Projects_Completed = st.sidebar.slider("Proyectos completados", 0, 10, 3)
 
 # ==========================
@@ -82,15 +82,19 @@ st.dataframe(input_data, width="stretch")
 try:
     X_new_clean = cleaner.transform(input_data)
 except Exception as e:
-    st.error(f"Error al aplicar el 'cleaner': {e}")
+    st.error(f"❌ Error al aplicar el preprocesamiento: {e}")
     st.stop()
 
 # ==========================
 # 🔮 PREDICCIONES
 # ==========================
-pred_rf = model_rf.predict_proba(X_new_clean)[0][1]
-pred_dt = model_dt.predict_proba(X_new_clean)[0][1]
-pred_lr = model_lr.predict_proba(X_new_clean)[0][1]
+try:
+    pred_rf = model_rf.predict_proba(X_new_clean)[0][1]
+    pred_dt = model_dt.predict_proba(X_new_clean)[0][1]
+    pred_lr = model_lr.predict_proba(X_new_clean)[0][1]
+except Exception as e:
+    st.error(f"⚠️ Error durante la predicción: {e}")
+    st.stop()
 
 # ==========================
 # 📈 RESULTADOS
@@ -114,7 +118,7 @@ fig, ax = plt.subplots(figsize=(6, 3))
 ax.barh(models, values, color=["#1f77b4", "#ff7f0e", "#2ca02c"])
 ax.set_xlim(0, 1)
 ax.set_xlabel("Probabilidad de ser contratado", fontsize=10)
-ax.set_title("Comparación entre modelos")
+ax.set_title("Comparación entre modelos", fontsize=11, pad=10)
 for i, v in enumerate(values):
     ax.text(v + 0.01, i, f"{v*100:.1f}%", va="center", fontsize=9)
 st.pyplot(fig)
