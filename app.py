@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
+import sys
+import streamlit as st
+st.write("Python version:", sys.version)
 
 # -----------------------------
 # CARGAR MODELOS
@@ -81,4 +84,5 @@ best_model = models[values.index(max(values))]
 st.success(f"✅ El modelo con mayor probabilidad predice que estás **{max(values)*100:.1f}% empleable** según **{best_model}**.")
 st.markdown("---")
 st.caption("Desarrollado por Samantha Quintanchala — Proyecto Final de Machine Learning")
+
 
